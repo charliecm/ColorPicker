@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace ColorPicker
 {
-	public partial class MainForm : Form
-	{
+
+    public partial class MainForm : Form
+    {
         private Screen screen;
-		private readonly Timer getColor;
-		private bool txtHexFullBlocked = false;
-		private bool txtHexShortBlocked = false;
+        private readonly Timer getColor;
+        private bool txtHexFullBlocked = false;
+        private bool txtHexShortBlocked = false;
         // Sample
         private Bitmap sampleBitmap = null;
         private bool hasSampled = false;
@@ -32,9 +31,9 @@ namespace ColorPicker
             }
         }
         // Sample preview
-        private int previewSize = 80;
-        private int previewX = 10;
-        private int previewY = 40;
+        private const int previewSize = 80;
+        private const int previewX = 10;
+        private const int previewY = 40;
         // Move form dependencies
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -42,37 +41,51 @@ namespace ColorPicker
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
-        
-		public MainForm()
-		{
-			InitializeComponent();
-			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
+        public MainForm()
+        {
+            InitializeComponent();
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
+            chkPin.Checked = Properties.Settings.Default.StayOnTop;
+            this.TopMost = chkPin.Checked;
 
             // Setup get color timer
-			getColor = new Timer {Interval = 10};
-			getColor.Tick += new EventHandler(GetColorTick);
+            getColor = new Timer { Interval = 10 };
+            getColor.Tick += new EventHandler(GetColorTick);
 
             previewColors = new Color[previewSize, previewSize];
-		}
+        }
 
         /// <summary>
         /// Populates textboxes with correct color values.
         /// </summary>
-		private void TranslateColor()
-		{
-			try
-			{
-				string htmlColor = ColorTranslator.ToHtml(sampleColor);
-				htmlColor = htmlColor.StartsWith("#") ? htmlColor : htmlColor.ToLower();
-				if (!txtHexFullBlocked)
-					txtHexFull.Text = htmlColor;
-				if (!txtHexShortBlocked)
-					txtHexShort.Text = htmlColor.StartsWith("#") ? htmlColor.Substring(1) : htmlColor;
-                txtRgbShort.Text = String.Format("{0}, {1}, {2}", sampleColor.R, sampleColor.G, sampleColor.B);
-			}
-			finally { }
-		}
-		
+        private void TranslateColor()
+        {
+            if (!hasSampled) return;
+
+            try
+            {
+                string htmlColor = ColorTranslator.ToHtml(sampleColor);
+                htmlColor = htmlColor.StartsWith("#") ? htmlColor : htmlColor.ToLower();
+                if (!txtHexFullBlocked) txtHexFull.Text = htmlColor;
+                if (!txtHexShortBlocked) txtHexShort.Text = htmlColor.StartsWith("#") ? htmlColor.Substring(1) : htmlColor;
+
+                if (Properties.Settings.Default.UseFloat)
+                {
+                    string tmpR = (sampleColor.R / 255f).ToString("0.##f", CultureInfo.GetCultureInfo("en-us"));
+                    string tmpG = (sampleColor.G / 255f).ToString("0.##f", CultureInfo.GetCultureInfo("en-us"));
+                    string tmpB = (sampleColor.B / 255f).ToString("0.##f", CultureInfo.GetCultureInfo("en-us"));
+                    txtRgbShort.Text = string.Format("{0}, {1}, {2}", tmpR, tmpG, tmpB);
+                }
+                else
+                {
+                    txtRgbShort.Text = string.Format("{0}, {1}, {2}", sampleColor.R, sampleColor.G, sampleColor.B);
+                }
+            }
+            finally { }
+        }
+
         /// <summary>
         /// Returns the sample region.
         /// </summary>
@@ -84,7 +97,7 @@ namespace ColorPicker
         {
             var bmp = new Bitmap(sampleSize, sampleSize, PixelFormat.Format32bppArgb);
             Graphics gfxScreenshot = Graphics.FromImage(bmp);
-            gfxScreenshot.CopyFromScreen(mouseX - sampleSize/2, mouseY - sampleSize/2, 0, 0, new Size(sampleSize, sampleSize));
+            gfxScreenshot.CopyFromScreen(mouseX - sampleSize / 2, mouseY - sampleSize / 2, 0, 0, new Size(sampleSize, sampleSize));
             gfxScreenshot.Save();
             gfxScreenshot.Dispose();
             return bmp;
@@ -178,6 +191,8 @@ namespace ColorPicker
         private void chkPin_CheckedChanged(object sender, EventArgs e)
         {
             this.TopMost = chkPin.Checked;
+            Properties.Settings.Default.StayOnTop = chkPin.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void btnOpenColorChooser_Click(object sender, EventArgs e)
@@ -185,23 +200,23 @@ namespace ColorPicker
             OpenColorChooserDialog();
         }
 
-		private void btnPickColor_MouseDown(object sender, MouseEventArgs e)
-		{
-			getColor.Start();
-			var cv = new CursorConverter();
-			var cursor = (Cursor)cv.ConvertFrom(Properties.Resources.pipette);
+        private void btnPickColor_MouseDown(object sender, MouseEventArgs e)
+        {
+            getColor.Start();
+            var cv = new CursorConverter();
+            var cursor = (Cursor)cv.ConvertFrom(Properties.Resources.pipette);
             if (!hasSampled)
             {
                 btnPickColor.BackgroundImage = null;
                 hasSampled = true;
             }
-			this.Cursor = cursor;
-		}
+            this.Cursor = cursor;
+        }
 
-		private void btnPickColor_MouseUp(object sender, MouseEventArgs e)
-		{
-			getColor.Stop();
-			this.Cursor = Cursors.Default;
+        private void btnPickColor_MouseUp(object sender, MouseEventArgs e)
+        {
+            getColor.Stop();
+            this.Cursor = Cursors.Default;
 
             // Clean up
             if (sampleBitmap != null)
@@ -210,7 +225,7 @@ namespace ColorPicker
                 sampleBitmap = null;
             }
             System.GC.Collect();
-		}
+        }
 
         private void txtHexFull_TextChanged(object sender, EventArgs e)
         {
@@ -227,30 +242,38 @@ namespace ColorPicker
             }
         }
 
-		private void txtHexShort_TextChanged(object sender, EventArgs e)
-		{
-			if (txtHexShort.Text.Length == 6)
-			{
-				sampleColor = ColorTranslator.FromHtml("#" + txtHexShort.Text);
-				TranslateColor();
-			}
-			else if (txtHexShort.Text.Length == 3)
-			{
-				sampleColor = ColorTranslator.FromHtml("#" + txtHexShort.Text);
-				txtHexShortBlocked = true;
-				TranslateColor();
-			}
-		}
-        
+        private void txtHexShort_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtHexShort.Text.Length == 6)
+                {
+                    sampleColor = ColorTranslator.FromHtml("#" + txtHexShort.Text);
+                    TranslateColor();
+                }
+                else if (txtHexShort.Text.Length == 3)
+                {
+                    sampleColor = ColorTranslator.FromHtml("#" + txtHexShort.Text);
+                    txtHexShortBlocked = true;
+                    TranslateColor();
+                }
+            }
+            catch (FormatException fex)
+            {
+                sampleColor = Color.Black;
+                TranslateColor();
+            }
+        }
+
         private void txtHexFull_Leave(object sender, EventArgs e)
         {
             txtHexFullBlocked = false;
         }
 
-		private void txtHexShort_Leave(object sender, EventArgs e)
-		{
-			txtHexShortBlocked = false;
-		}
+        private void txtHexShort_Leave(object sender, EventArgs e)
+        {
+            txtHexShortBlocked = false;
+        }
 
         private void txtHexFull_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -294,5 +317,19 @@ namespace ColorPicker
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-	}
+
+        private void contextFloat_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.UseFloat = true;
+            Properties.Settings.Default.Save();
+            TranslateColor();
+        }
+
+        private void contextByte_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.UseFloat = false;
+            Properties.Settings.Default.Save();
+            TranslateColor();
+        }
+    }
 }

@@ -32,12 +32,16 @@
             this.txtHexFull = new System.Windows.Forms.TextBox();
             this.txtHexShort = new System.Windows.Forms.TextBox();
             this.txtRgbShort = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextFloat = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextByte = new System.Windows.Forms.ToolStripMenuItem();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             this.btnPickColor = new System.Windows.Forms.Button();
             this.chkPin = new System.Windows.Forms.CheckBox();
             this.btnOpenColorPicker = new System.Windows.Forms.Button();
             this.lbTitle = new System.Windows.Forms.Label();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtHexFull
@@ -73,12 +77,14 @@
             this.txtHexShort.Click += new System.EventHandler(this.TextBoxSelectAll);
             this.txtHexShort.TextChanged += new System.EventHandler(this.txtHexShort_TextChanged);
             this.txtHexShort.DoubleClick += new System.EventHandler(this.TextBoxCopyToClipboard);
+            this.txtHexShort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHexFull_KeyPress);
             this.txtHexShort.Leave += new System.EventHandler(this.txtHexShort_Leave);
             // 
             // txtRgbShort
             // 
             this.txtRgbShort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.txtRgbShort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRgbShort.ContextMenuStrip = this.contextMenuStrip1;
             this.txtRgbShort.ForeColor = System.Drawing.Color.White;
             this.txtRgbShort.Location = new System.Drawing.Point(100, 100);
             this.txtRgbShort.Margin = new System.Windows.Forms.Padding(5);
@@ -90,6 +96,28 @@
             this.tooltip.SetToolTip(this.txtRgbShort, "Double-click to copy");
             this.txtRgbShort.Click += new System.EventHandler(this.TextBoxSelectAll);
             this.txtRgbShort.DoubleClick += new System.EventHandler(this.TextBoxCopyToClipboard);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextFloat,
+            this.contextByte});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            // 
+            // contextFloat
+            // 
+            this.contextFloat.Name = "contextFloat";
+            this.contextFloat.Size = new System.Drawing.Size(152, 22);
+            this.contextFloat.Text = "Range: 0 - 1";
+            this.contextFloat.Click += new System.EventHandler(this.contextFloat_Click);
+            // 
+            // contextByte
+            // 
+            this.contextByte.Name = "contextByte";
+            this.contextByte.Size = new System.Drawing.Size(152, 22);
+            this.contextByte.Text = "Range: 0 - 255";
+            this.contextByte.Click += new System.EventHandler(this.contextByte_Click);
             // 
             // btnClose
             // 
@@ -203,6 +231,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Color Picker";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,6 +248,9 @@
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lbTitle;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem contextFloat;
+        private System.Windows.Forms.ToolStripMenuItem contextByte;
     }
 }
 
