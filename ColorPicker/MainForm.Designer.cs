@@ -1,5 +1,7 @@
 ﻿namespace ColorPicker
 {
+    using ColorPicker.Properties;
+
     partial class MainForm
     {
         /// <summary>
@@ -53,9 +55,9 @@
             this.txtHexFull.Margin = new System.Windows.Forms.Padding(5);
             this.txtHexFull.Name = "txtHexFull";
             this.txtHexFull.Size = new System.Drawing.Size(100, 20);
-            this.txtHexFull.TabIndex = 2;
+            this.txtHexFull.TabIndex = 1;
             this.txtHexFull.Text = "#000000";
-            this.tooltip.SetToolTip(this.txtHexFull, "Double-click to copy");
+            this.tooltip.SetToolTip(this.txtHexFull, global::ColorPicker.Properties.Resources.DoubleToCopy);
             this.txtHexFull.Click += new System.EventHandler(this.TextBoxSelectAll);
             this.txtHexFull.TextChanged += new System.EventHandler(this.txtHexFull_TextChanged);
             this.txtHexFull.DoubleClick += new System.EventHandler(this.TextBoxCopyToClipboard);
@@ -71,9 +73,9 @@
             this.txtHexShort.Margin = new System.Windows.Forms.Padding(5);
             this.txtHexShort.Name = "txtHexShort";
             this.txtHexShort.Size = new System.Drawing.Size(100, 20);
-            this.txtHexShort.TabIndex = 3;
+            this.txtHexShort.TabIndex = 2;
             this.txtHexShort.Text = "000000";
-            this.tooltip.SetToolTip(this.txtHexShort, "Double-click to copy");
+            this.tooltip.SetToolTip(this.txtHexShort, global::ColorPicker.Properties.Resources.DoubleToCopy);
             this.txtHexShort.Click += new System.EventHandler(this.TextBoxSelectAll);
             this.txtHexShort.TextChanged += new System.EventHandler(this.txtHexShort_TextChanged);
             this.txtHexShort.DoubleClick += new System.EventHandler(this.TextBoxCopyToClipboard);
@@ -91,9 +93,9 @@
             this.txtRgbShort.Name = "txtRgbShort";
             this.txtRgbShort.ReadOnly = true;
             this.txtRgbShort.Size = new System.Drawing.Size(100, 20);
-            this.txtRgbShort.TabIndex = 4;
+            this.txtRgbShort.TabIndex = 3;
             this.txtRgbShort.Text = "0, 0, 0";
-            this.tooltip.SetToolTip(this.txtRgbShort, "Double-click to copy");
+            this.tooltip.SetToolTip(this.txtRgbShort, global::ColorPicker.Properties.Resources.DoubleToCopy);
             this.txtRgbShort.Click += new System.EventHandler(this.TextBoxSelectAll);
             this.txtRgbShort.DoubleClick += new System.EventHandler(this.TextBoxCopyToClipboard);
             // 
@@ -103,20 +105,20 @@
             this.contextFloat,
             this.contextByte});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 48);
             // 
             // contextFloat
             // 
             this.contextFloat.Name = "contextFloat";
-            this.contextFloat.Size = new System.Drawing.Size(152, 22);
-            this.contextFloat.Text = "Range: 0 - 1";
+            this.contextFloat.Size = new System.Drawing.Size(148, 22);
+            this.contextFloat.Text = global::ColorPicker.Properties.Resources.RangeFloat;
             this.contextFloat.Click += new System.EventHandler(this.contextFloat_Click);
             // 
             // contextByte
             // 
             this.contextByte.Name = "contextByte";
-            this.contextByte.Size = new System.Drawing.Size(152, 22);
-            this.contextByte.Text = "Range: 0 - 255";
+            this.contextByte.Size = new System.Drawing.Size(148, 22);
+            this.contextByte.Text = global::ColorPicker.Properties.Resources.RangeByte;
             this.contextByte.Click += new System.EventHandler(this.contextByte_Click);
             // 
             // btnClose
@@ -132,8 +134,8 @@
             this.btnClose.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(36, 25);
-            this.btnClose.TabIndex = 7;
-            this.tooltip.SetToolTip(this.btnClose, "Close (ESC)");
+            this.btnClose.TabIndex = 6;
+            this.tooltip.SetToolTip(this.btnClose, global::ColorPicker.Properties.Resources.CloseText);
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -151,7 +153,8 @@
             this.btnPickColor.Name = "btnPickColor";
             this.btnPickColor.Size = new System.Drawing.Size(80, 80);
             this.btnPickColor.TabIndex = 6;
-            this.tooltip.SetToolTip(this.btnPickColor, "Press and drag to sample color");
+            this.btnPickColor.TabStop = false;
+            this.tooltip.SetToolTip(this.btnPickColor, global::ColorPicker.Properties.Resources.PickText);
             this.btnPickColor.UseVisualStyleBackColor = false;
             this.btnPickColor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPickColor_MouseDown);
             this.btnPickColor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPickColor_MouseUp);
@@ -170,8 +173,8 @@
             this.chkPin.Margin = new System.Windows.Forms.Padding(5);
             this.chkPin.Name = "chkPin";
             this.chkPin.Size = new System.Drawing.Size(36, 36);
-            this.chkPin.TabIndex = 1;
-            this.tooltip.SetToolTip(this.chkPin, "Always on top");
+            this.chkPin.TabIndex = 5;
+            this.tooltip.SetToolTip(this.chkPin, global::ColorPicker.Properties.Resources.OnTop);
             this.chkPin.UseVisualStyleBackColor = false;
             this.chkPin.CheckedChanged += new System.EventHandler(this.chkPin_CheckedChanged);
             // 
@@ -188,8 +191,8 @@
             this.btnOpenColorPicker.Margin = new System.Windows.Forms.Padding(5);
             this.btnOpenColorPicker.Name = "btnOpenColorPicker";
             this.btnOpenColorPicker.Size = new System.Drawing.Size(36, 36);
-            this.btnOpenColorPicker.TabIndex = 0;
-            this.tooltip.SetToolTip(this.btnOpenColorPicker, "Choose color");
+            this.btnOpenColorPicker.TabIndex = 4;
+            this.tooltip.SetToolTip(this.btnOpenColorPicker, global::ColorPicker.Properties.Resources.Choose);
             this.btnOpenColorPicker.UseVisualStyleBackColor = false;
             this.btnOpenColorPicker.Click += new System.EventHandler(this.btnOpenColorChooser_Click);
             // 

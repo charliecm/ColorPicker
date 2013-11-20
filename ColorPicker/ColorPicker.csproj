@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +100,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\appbar.dropper.png" />
-    <None Include="Resources\appbar.settings.png" />
     <None Include="Resources\appbar.close.png" />
     <None Include="Resources\appbar.pin.png" />
     <None Include="Resources\appbar.draw.pixel.fill.grid.png" />
