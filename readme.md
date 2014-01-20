@@ -4,6 +4,8 @@
 
 A dead-simple Windows color picker by [@charliecm](http://twitter.com/charliecm).
 
-Based on http://sourceforge.net/projects/colorfinder/
+Based on http://sourceforge.net/projects/colorfinder/.
 
-Icons from [ModernUIIcons.com](http://modernuiicons.com)
+Icons from [ModernUIIcons.com](http://modernuiicons.com).
+
+German translation by [madpew](https://github.com/madpew).
