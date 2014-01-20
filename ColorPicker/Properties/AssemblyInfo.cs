@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Resources;
 
@@ -9,7 +8,7 @@ using System.Resources;
 [assembly: AssemblyTitle("Color Picker")]
 [assembly: AssemblyDescription("A dead-simple color picker.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Charlie Chao")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Color Picker")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
@@ -33,6 +32,6 @@ using System.Resources;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguageAttribute("en-CA")]
+[assembly: AssemblyVersion("1.0.2.0")]
+[assembly: AssemblyFileVersion("1.0.2.0")]
+[assembly: NeutralResourcesLanguageAttribute("en-us")]

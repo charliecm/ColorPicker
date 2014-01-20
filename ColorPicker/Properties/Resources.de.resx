@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>105, 17</value>
-  </metadata>
+  <data name="Choose" xml:space="preserve">
+    <value>Farbe wählen</value>
+  </data>
+  <data name="CloseText" xml:space="preserve">
+    <value>Schließen (Esc)</value>
+  </data>
+  <data name="DoubleToCopy" xml:space="preserve">
+    <value>Zum Kopieren Doppelklicken</value>
+  </data>
+  <data name="OnTop" xml:space="preserve">
+    <value>Immer im Vordergrund</value>
+  </data>
+  <data name="PickText" xml:space="preserve">
+    <value>Klicken &amp; Ziehen</value>
+  </data>
+  <data name="RangeByte" xml:space="preserve">
+    <value>Bereich: 0 - 255</value>
+  </data>
+  <data name="RangeFloat" xml:space="preserve">
+    <value>Bereich: 0 - 1</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Color Picker</value>
+  </data>
 </root>
